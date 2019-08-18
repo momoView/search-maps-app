@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
 import { SearchMapsModule } from './search-maps/search-maps.module';
-import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
 import { reducers } from './store/app.reducers';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { reducers } from './store/app.reducers';
   imports: [
     BrowserModule,
     SearchMapsModule,
-    AppRoutingModule,
+    CoreModule,
     StoreModule.forRoot(reducers),
   ],
   bootstrap: [AppComponent]
