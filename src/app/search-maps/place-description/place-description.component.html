@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-12">
+    <ul class="list-group list-unstyled">
+      <li class="list-group-item">Description</li>
+      <li
+        *ngIf="(smState$ | async).place.name != null"
+        class="list-group-item clearfix list-group-item-info">
+        <u>Name</u>: {{ (smState$ | async).place.name }}
+      </li>
+      <li
+        *ngIf="(smState$ | async).place.lat != null"
+        class="list-group-item clearfix list-group-item-info">
+        <p class="list-group-item-text">
+          <u>Latitude</u>: {{ (smState$ | async).place.lat | number: '1.0-8' }}
+        </p>
+      </li>
+      <li
+      *ngIf="(smState$ | async).place.lng != null"
+        class="list-group-item clearfix list-group-item-info">
+        <p class="list-group-item-text">
+          <u>Longitude</u>: {{ (smState$ | async).place.lng | number: '1.0-8' }}
+        </p>
+      </li>
+      <li
+        *ngIf="(smState$ | async).place.phoneNumber != null"
+        class="list-group-item clearfix list-group-item-info">
+        <p class="list-group-item-text">
+          <u>Phone</u>: {{ (smState$ | async).place.phoneNumber }}
+        </p>
+      </li>
+      <li
+        *ngIf="(smState$ | async).place.icon != null"
+        class="list-group-item clearfix list-group-item-info">
+        <u>Icon</u>:
+        <img
+          [src]="(smState$ | async).place.icon"
+          style="max-height: 42px;max-width: 42px;"
+          class="img-responsive"/>
+      </li>
+      <li
+        *ngIf="(smState$ | async).place.types != null"
+        class="list-group-item clearfix list-group-item-info">
+        <span class="list-group-item-text">
+          <u>Types</u>:
+          <ul class="list-inline">
+            <li *ngFor="let type of (smState$ | async).place.types">
+              {{ type }}
+            </li>
+          </ul>
+        </span>
+      </li>
+      <li
+        *ngIf="(smState$ | async).place.vicinity != null"
+        class="list-group-item clearfix list-group-item-info">
+        <p class="list-group-item-text">
+          <u>Vicinity</u>: {{ (smState$ | async).place.vicinity }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
