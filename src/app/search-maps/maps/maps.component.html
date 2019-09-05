@@ -1,7 +1,37 @@
 <div class="row">
   <div class="col-xs-10 container map-container">
-    <agm-map [latitude]="mapLat"
-      [longitude]="mapLng" [zoom]="zoom">
+    <agm-map
+      (mapClick)="onMapClicked($event)"
+      [latitude]="mapLat"
+      [longitude]="mapLng"
+      [zoom]="zoom">
+      <agm-marker
+        (markerClick)="onMarkerPClicked()"
+        [latitude]="(smState$ | async).place.lat"
+        [longitude]="(smState$ | async).place.lng"
+        name="placeMarker">
+        <agm-info-window
+          [isOpen]="openInfoP"
+          [latitude]="(smState$ | async).place.lat"
+          [longitude]="(smState$ | async).place.lng">
+          <ul class="list-unstyled">
+            <li>
+              <h6>{{ (smState$ | async).place.name }}</h6>
+            </li>
+            <li>
+              <span>
+                <img
+                  [src]="(smState$ | async).place.icon"
+                  style="max-height: 12px;max-width: 12px;"
+                  class="img-responsive"/>
+              </span>
+            </li>
+            <li>
+              <p>{{ (smState$ | async).place.vicinity }}</p>
+            </li>
+          </ul>
+        </agm-info-window>
+      </agm-marker>
     </agm-map>
   </div>
 </div>

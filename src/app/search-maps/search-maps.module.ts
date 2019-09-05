@@ -11,12 +11,14 @@ import { MapsAutocompleteComponent } from
   './maps-autocomplete/maps-autocomplete.component';
 import { SearchMapsComponent } from './search-maps.component';
 import { MapsComponent } from './maps/maps.component';
+import { PlaceDescriptionComponent } from './place-description/place-description.component';
 
 @NgModule({
   declarations: [
     SearchMapsComponent,
     MapsComponent,
     MapsAutocompleteComponent,
+    PlaceDescriptionComponent,
   ],
   imports: [
     SharedModule,

@@ -6,6 +6,8 @@ export const SET_CURRENT_PLACE = "SET_CURRENT_PLACE";
 export const SET_PLACE = 'SET_PLACE';
 export const DO_STORE = 'DO_STORE';
 export const ADD_TO_OLD_PLACES = 'ADD_TO_OLD_PLACES';
+export const SET_TEMPORARY_SP = 'SET_TEMPORARY_SP';
+export const SET_SPA = 'SET_SPA';
 
 export class SetCurrentPlace implements Action {
   readonly type = SET_CURRENT_PLACE;
@@ -31,5 +33,17 @@ export class AddToOldPlaces implements Action {
   constructor(public payload: Place) {}
 }
 
+export class SetTemporarySP implements Action {
+  readonly type = SET_TEMPORARY_SP;
+
+  constructor(public payload: Place) {}
+}
+
+export class SetSPA implements Action {
+  readonly type = SET_SPA;
+
+  constructor(public payload: boolean) {}
+}
+
 export type SMActions = SetCurrentPlace | SetPlace | DoStore
-  | AddToOldPlaces;
+  | AddToOldPlaces | SetTemporarySP | SetSPA;
