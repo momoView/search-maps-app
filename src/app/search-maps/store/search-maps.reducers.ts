@@ -47,6 +47,16 @@ export function searchMapsReducer(state = initialState,
           ...state, oldPlaces: [...state.oldPlaces,
             action.payload]
       };
+    case smActions.SET_TEMPORARY_SP:
+      const selPlace = { ...action.payload }
+      return {
+        ...state, selectedPlace: selPlace, mapPosition:
+          {lat: selPlace.lat, lng: selPlace.lng }
+      };
+    case smActions.SET_SPA:
+      return {
+        ...state, selectedPlaceAdded: action.payload
+      };
     default:
       return state;
   }
