@@ -1,0 +1,13 @@
+select{
+  flex:none;
+  min-width:216%;
+  max-width:301%;
+  margin-left:38%;
+  height:100%;
+  overflow-y:scroll;
+}
+.currentPlaceO{
+  color:rgb(102, 255, 102);
+  text-decoration: underline;
+  text-decoration-color:rgb(0, 204, 122);
+}
