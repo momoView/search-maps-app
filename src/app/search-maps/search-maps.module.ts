@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from '../shared/shared.module'
 import { AngularFireModule } from 'angularfire2';
@@ -29,6 +30,7 @@ import { OldPlacesComponent } from './old-places/old-places.component'
     GooglePlaceModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    HttpClientModule,
   ],
 })
 export class SearchMapsModule {}
