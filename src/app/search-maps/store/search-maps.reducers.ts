@@ -57,6 +57,11 @@ export function searchMapsReducer(state = initialState,
       return {
         ...state, selectedPlaceAdded: action.payload
       };
+    case smActions.STORE_SELECTED_PLACE:
+      return {
+        ...state, selectedPlace: { ...action.payload }
+      };
+    case smActions.VOID:
     default:
       return state;
   }
