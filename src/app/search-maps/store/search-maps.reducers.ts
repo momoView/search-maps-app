@@ -1,11 +1,19 @@
-import * as smActions from './search-maps.actions';
 import { Place } from '../../shared/place.model';
+import * as fromApp from '../../store/app.reducers';
+
+import * as smActions from './search-maps.actions';
+
+export interface FeatureState extends fromApp.AppState {
+  searchMaps: State
+}
 
 export interface State {
   currentPlace: Place,
   mapPosition: { lat: number, lng: number },
   place: Place,
   oldPlaces: any[],
+  selectedPlace: Place,
+  selectedPlaceAdded: boolean,
 }
 
 const initialState: State = {
@@ -20,9 +28,11 @@ const initialState: State = {
     phoneNumber: null,
     icon: null,
     types: null,
-    vicinity: null
+    vicinity: null,
   },
   oldPlaces: [],
+  selectedPlace:null,
+  selectedPlaceAdded:false,
 };
 
 export function searchMapsReducer(state = initialState,
