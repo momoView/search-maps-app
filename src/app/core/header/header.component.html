@@ -17,9 +17,18 @@
           <li><a routerLink="/signin">Login</a></li>
         </ng-template>
         <li>
-          <a *ngIf="(authState$ | async).authenticated"
+          <a
+            *ngIf="(authState$ | async).authenticated"
             (click)="onLogout()" style="cursor:pointer">
             Logout
+          </a>
+        </li>
+        <li>
+          <a
+            *ngIf="(authState$ | async).authenticated"
+            routerLink="/profile"
+            routerLinkActive="active">
+            Profile
           </a>
         </li>
       </ul>
