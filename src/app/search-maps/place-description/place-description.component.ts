@@ -12,7 +12,7 @@ import * as fromSM from '../store/search-maps.reducers';
 export class PlaceDescriptionComponent implements OnInit {
 smState$: Observable<fromSM.State>;
 
-  constructor(private store: Store<fromSM.State>) { }
+  constructor(private store: Store<fromSM.FeatureState>) { }
 
   ngOnInit() {
     this.smState$ = this.store.select('searchMaps');

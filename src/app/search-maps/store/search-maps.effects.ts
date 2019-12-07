@@ -24,7 +24,7 @@ export class SearchMapsEffects {
   constructor(private actions$: Actions,
     public db: AngularFireDatabase,
     private httpClient: HttpClient,
-    private store: Store<fromSM.State>) {
+    private store: Store<fromSM.FeatureState>) {
       this.placesRef = db.list('/places');
     }
 

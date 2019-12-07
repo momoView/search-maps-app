@@ -11,7 +11,7 @@ import * as authActions from '../store/auth.actions';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  constructor(private store: Store<fromSM.State>) { }
+  constructor(private store: Store<fromSM.FeatureState>) { }
 
   ngOnInit() {
   }

@@ -13,7 +13,7 @@ import * as fromSM from '../store/search-maps.reducers';
 export class MapsAutocompleteComponent implements OnInit {
   place: Place;
 
-  constructor(private store: Store<fromSM.State>) { }
+  constructor(private store: Store<fromSM.FeatureState>) { }
 
   ngOnInit() {
   }

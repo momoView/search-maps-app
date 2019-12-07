@@ -12,7 +12,7 @@ import * as authActions from '../store/auth.actions';
 })
 export class SigninComponent implements OnInit {
 
-  constructor(private store: Store<fromSM.State>) { }
+  constructor(private store: Store<fromSM.FeatureState>) { }
 
   ngOnInit() {
   }

@@ -16,7 +16,7 @@ import * as isActions from '../../shared/infinite-scroll-store/infinite-scroll.a
 export class OldPlacesComponent implements OnInit {
   smState$: Observable<fromSM.State>;
 
-  constructor(private store: Store<fromSM.State>) {}
+  constructor(private store: Store<fromSM.FeatureState>) {}
 
   ngOnInit() {
     this.smState$ = this.store.select('searchMaps');

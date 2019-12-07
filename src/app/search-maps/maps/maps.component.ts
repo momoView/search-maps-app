@@ -22,7 +22,7 @@ export class MapsComponent implements OnInit, OnDestroy {
   mapLng: number;
   subscription: Subscription;
 
-  constructor(private store: Store<fromSM.State>) {}
+  constructor(private store: Store<fromSM.FeatureState>) {}
 
   ngOnInit() {
     this.smState$ = this.store.select('searchMaps');

@@ -12,7 +12,7 @@ import { Place } from '../shared/place.model';
   styleUrls: ['./search-maps.component.css']
 })
 export class SearchMapsComponent implements OnInit {
-  constructor(private store: Store<fromSM.State>) {}
+  constructor(private store: Store<fromSM.FeatureState>) {}
 
   ngOnInit() {
     let lat, lng, name, place;
