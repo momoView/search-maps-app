@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
+import * as fromAuth from '../../auth/store/auth.reducers';
 import  { Place } from '../../shared/place.model';
 import * as smActions from '../store/search-maps.actions';
 import * as fromSM from '../store/search-maps.reducers';
@@ -12,10 +14,12 @@ import * as fromSM from '../store/search-maps.reducers';
 })
 export class MapsAutocompleteComponent implements OnInit {
   place: Place;
+  authState$: Observable<fromAuth.State>;
 
-  constructor(private store: Store<fromSM.State>) { }
+  constructor(private store: Store<fromSM.FeatureState>) { }
 
   ngOnInit() {
+    this.authState$ = this.store.select('auth');
   }
 
   handleAddressChange(address) {

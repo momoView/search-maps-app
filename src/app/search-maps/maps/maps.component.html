@@ -9,7 +9,9 @@
         (markerClick)="onMarkerPClicked()"
         [latitude]="(smState$ | async).place.lat"
         [longitude]="(smState$ | async).place.lng"
-        name="placeMarker">
+        name="placeMarker"
+        *ngIf="(authState$ | async).authenticated"
+      >
         <agm-info-window
           [isOpen]="openInfoP"
           [latitude]="(smState$ | async).place.lat"

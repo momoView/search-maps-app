@@ -1,16 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from 
   '@angular/platform-browser-dynamic';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { SearchMapsModule } from './search-maps/search-maps.module';
+import { AuthModule } from './auth/auth.module';
+import {AuthEffects} from './auth/store/auth.effects';
 import { CoreModule } from './core/core.module';
+import { SearchMapsModule } from './search-maps/search-maps.module';
 import { reducers } from './store/app.reducers';
-import { SearchMapsEffects } from 
-  './search-maps/store/search-maps.effects';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,9 @@ import { SearchMapsEffects } from
     BrowserModule,
     SearchMapsModule,
     CoreModule,
+    AuthModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([SearchMapsEffects]),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   bootstrap: [AppComponent]
 })

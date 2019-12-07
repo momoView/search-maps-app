@@ -2,25 +2,27 @@
   <select
     infinite-scroll
     class="form-control col-xs-12 col-sm-10 col-md-8"
-    size="10"
+    [size]="(authState$ | async).authenticated ? 10 : 1"
     (change)="placeChange($event)" [infiniteScrollDistance]="0"
     [infiniteScrollUpDistance]="1" (scrolled)="nextPlaces()"
     (scrolledUp)="prevPlaces()" [scrollWindow]="false"
-    [infiniteScrollThrottle]="300" [alwaysCallback]="true">
-      <option
-        selected="true"
-        value="-2">
-      </option>
-      <option
-        class="currentPlaceO"
-        value="-1">
-        Current place
-      </option>
-      <option
-        *ngFor="let oldPlace of (smState$ | async).oldPlaces;
-          let i = index"
-        [value]="i">
-        {{ oldPlace.name }}
-      </option>
+    [infiniteScrollThrottle]="300" [alwaysCallback]="true"
+    [disabled]="!(authState$ | async).authenticated"
+  >
+    <option
+      selected="true"
+      value="-2">
+    </option>
+    <option
+      class="currentPlaceO"
+      value="-1">
+      Current place
+    </option>
+    <option
+      *ngFor="let oldPlace of (smState$ | async).oldPlaces;
+        let i = index"
+      [value]="i">
+      {{ oldPlace.name }}
+    </option>
   </select>
 </div>

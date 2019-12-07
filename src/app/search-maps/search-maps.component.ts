@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { } from 'googlemaps';
+import { take } from 'rxjs/operators';
 
+import * as isActions from '../shared/infinite-scroll-store/infinite-scroll.actions';
+import { Place } from '../shared/place.model';
 import * as fromSM from './store/search-maps.reducers';
 import * as smActions from './store/search-maps.actions';
-import { Place } from '../shared/place.model';
 
 @Component({
   selector: 'app-search-maps',
@@ -12,7 +14,7 @@ import { Place } from '../shared/place.model';
   styleUrls: ['./search-maps.component.css']
 })
 export class SearchMapsComponent implements OnInit {
-  constructor(private store: Store<fromSM.State>) {}
+  constructor(private store: Store<fromSM.FeatureState>) {}
 
   ngOnInit() {
     let lat, lng, name, place;
@@ -30,8 +32,25 @@ export class SearchMapsComponent implements OnInit {
         }
 
         place = new Place(name, lat, lng, "", "", [], "");
+        this.store.dispatch(new smActions.SetPlace(place));
         this.store.dispatch(new smActions.SetCurrentPlace(place));
       });
     }
+
+    this.store.dispatch(new isActions.DoInitializeScroll());
+    this.store.select('auth').pipe(take(1)).subscribe(
+      (authState) => {
+        if (authState.authenticated) {
+          this.store.select('infiniteScroll').pipe(take(1)).subscribe(
+            (isState) => {
+              this.store.dispatch(new smActions.DoFetch({ 
+                startAt: isState.reachedUp,
+                endBefore: isState.reachedDown + 1
+              }));
+            }
+          );
+        }
+      }
+    );
   }
 }
