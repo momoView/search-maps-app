@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import {Observable} from 'rxjs';
 import {
   map,
   catchError,
@@ -44,6 +45,44 @@ export class SearchMapsEffects {
   ), catchError(
     (error, X) => {
       console.log(error);
+      return X;
+    }
+  ));
+
+  getPlaces(actionData: { startAt: number, endBefore: number }): Observable<any[]> {
+    return this.placesRef.snapshotChanges().pipe(map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    }), map(
+      places => {
+        let placesV;
+
+        if (actionData.endBefore > places.length) {
+          placesV = _.slice(places, actionData.startAt, places.length);
+        } else {
+          placesV = _.slice(places, actionData.startAt, actionData.endBefore);
+        }
+        
+        return placesV;
+    }));
+  }
+
+  @Effect()
+  doFetch$ = this.actions$.pipe(ofType(smActions.DO_FETCH), map(
+    (smAction: smActions.DoFetch) => {
+      return smAction.payload;
+    }
+  ), switchMap(
+    (actionData: { startAt: number, endBefore: number }) => {
+      return this.getPlaces(actionData);
+    }
+  ), map(
+    (afPlaces: any[]) => {
+      return new smActions.SetPlaces(afPlaces);
+    }
+  ),catchError(
+    (error,X)=>{
+      console.log(error);
+      console.log(X);
       return X;
     }
   ));

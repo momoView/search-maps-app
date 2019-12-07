@@ -47,6 +47,11 @@ export function searchMapsReducer(state = initialState,
           ...state, oldPlaces: [...state.oldPlaces,
             action.payload]
       };
+    case smActions.SET_PLACES:
+      const cPlaces = [...action.payload];
+      return {
+        ...state, oldPlaces: cPlaces
+      };
     case smActions.SET_TEMPORARY_SP:
       const selPlace = { ...action.payload }
       return {
