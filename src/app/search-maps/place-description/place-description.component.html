@@ -5,31 +5,36 @@
       <li
         *ngIf="(smState$ | async).place.name != null"
         class="list-group-item clearfix list-group-item-info">
-        <u>Name</u>: {{ (smState$ | async).place.name }}
+        <u class="description--label">Name</u>: 
+        <div class="description--value">{{ (smState$ | async).place.name }}</div>
       </li>
       <li
         *ngIf="(smState$ | async).place.lat != null"
         class="list-group-item clearfix list-group-item-info">
-        <p class="list-group-item-text">
-          <u>Latitude</u>: {{ (smState$ | async).place.lat | number: '1.0-8' }}
-        </p>
+        <div class="list-group-item-text">
+          <u class="description--label">Latitude</u>: 
+          <div class="description--value">{{ (smState$ | async).place.lat | number: '1.0-8' }}</div>
+        </div>
       </li>
       <li
       *ngIf="(smState$ | async).place.lng != null"
         class="list-group-item clearfix list-group-item-info">
-        <p class="list-group-item-text">
-          <u>Longitude</u>: {{ (smState$ | async).place.lng | number: '1.0-8' }}
-        </p>
+        <div class="list-group-item-text">
+          <u class="description--label">Longitude</u>: 
+          <div class="description--value">{{ (smState$ | async).place.lng | number: '1.0-8' }}</div>
+        </div>
       </li>
       <li
         *ngIf="(smState$ | async).place.phoneNumber != null"
         class="list-group-item clearfix list-group-item-info">
-        <p class="list-group-item-text">
-          <u>Phone</u>: {{ (smState$ | async).place.phoneNumber }}
-        </p>
+        <div class="list-group-item-text">
+          <u class="description--label">Phone</u>: 
+          <div class="description--value">{{ (smState$ | async).place.phoneNumber }}</div>
+        </div>
       </li>
       <li
-        *ngIf="(smState$ | async).place.icon != null"
+        *ngIf="(smState$ | async).place
+          && (smState$ | async).place.icon"
         class="list-group-item clearfix list-group-item-info">
         <u>Icon</u>:
         <img
@@ -41,10 +46,10 @@
         *ngIf="(smState$ | async).place.types != null"
         class="list-group-item clearfix list-group-item-info">
         <span class="list-group-item-text">
-          <u>Types</u>:
+          <u class="description--label">Types</u>:
           <ul class="list-inline">
             <li *ngFor="let type of (smState$ | async).place.types">
-              {{ type }}
+              <div class="description--value">{{ type }}</div>
             </li>
           </ul>
         </span>
@@ -52,9 +57,10 @@
       <li
         *ngIf="(smState$ | async).place.vicinity != null"
         class="list-group-item clearfix list-group-item-info">
-        <p class="list-group-item-text">
-          <u>Vicinity</u>: {{ (smState$ | async).place.vicinity }}
-        </p>
+        <div class="list-group-item-text">
+          <u class="description--label">Vicinity</u>: 
+          <div class="description--value">{{ (smState$ | async).place.vicinity }}</div>
+        </div>
       </li>
     </ul>
   </div>

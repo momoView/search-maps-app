@@ -14,7 +14,7 @@ import * as _ from "lodash";
 
 import * as smActions from './search-maps.actions';
 import * as fromSM from './search-maps.reducers';
-import { Place } from '../../shared/place.model'
+import { Place } from '../../shared/place.model';
 
 @Injectable()
 export class SearchMapsEffects {
@@ -54,7 +54,7 @@ export class SearchMapsEffects {
       return smAction.payload;
     }
   ), switchMap(
-    (actionData: {lat: number, lng: number }) => {
+    (actionData: {lat: number, lng: number }) => {      
       return this.httpClient.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
       "location=" + actionData.lat + "," + actionData.lng +
       "&radius=24&key=AIzaSyB9JZkvyU7eCkoAnCukbkKkkfZpBuXEAsA");

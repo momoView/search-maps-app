@@ -19,7 +19,8 @@
             <li>
               <h6>{{ (smState$ | async).place.name }}</h6>
             </li>
-            <li>
+            <li *ngIf="(smState$ | async).place
+              && (smState$ | async).place.icon">
               <span>
                 <img
                   [src]="(smState$ | async).place.icon"
@@ -50,7 +51,8 @@
                 {{ (smState$ | async).selectedPlace.name }}
               </h6>
             </li>
-            <li>
+            <li *ngIf="(smState$ | async).selectedPlace
+              && (smState$ | async).selectedPlace.icon">
               <span>
                 <img
                   [src]="(smState$ | async).selectedPlace.icon"
