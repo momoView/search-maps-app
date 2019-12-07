@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import * as fromSM from '../store/search-maps.reducers';
 import { Place } from '../../shared/place.model'
 import * as smActions from '../store/search-maps.actions';
+import * as isActions from '../../shared/infinite-scroll-store/infinite-scroll.actions';
 
 @Component({
   selector: 'app-old-places',
@@ -20,6 +21,24 @@ export class OldPlacesComponent implements OnInit {
   ngOnInit() {
     this.smState$ = this.store.select('searchMaps');
   }
+
+  nextPlaces(event) {
+    this.store.dispatch(new isActions.SetNextScroll());
+    this.store.select('infiniteScroll').pipe(take(1)).subscribe(
+      (isState) => {
+        this.store.dispatch(new smActions.DoFetch({startAt: isState.reachedUp, endBefore: isState.reachedDown + 1}));
+      }
+    );
+  }
+
+  prevPlaces(event) {
+    this.store.dispatch(new isActions.SetPrevScroll());
+    this.store.select('infiniteScroll').pipe(take(1)).subscribe(
+     (isState) => {
+       this.store.dispatch(new smActions.DoFetch({startAt: isState.reachedUp, endBefore: isState.reachedDown + 1}));
+     }
+   );
+ }
 
   placeChange(event) {
     this.store.select('searchMaps').pipe(take(1)).subscribe(
