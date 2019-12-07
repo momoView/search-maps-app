@@ -1,6 +1,8 @@
-import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { InfiniteScrollModule} from 'ngx-infinite-scroll';
 
 import { SharedModule } from '../shared/shared.module'
 import { AngularFireModule } from 'angularfire2';
@@ -12,6 +14,7 @@ import { MapsAutocompleteComponent } from
 import { SearchMapsComponent } from './search-maps.component';
 import { MapsComponent } from './maps/maps.component';
 import { PlaceDescriptionComponent } from './place-description/place-description.component';
+import { OldPlacesComponent } from './old-places/old-places.component'
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { PlaceDescriptionComponent } from './place-description/place-description
     MapsComponent,
     MapsAutocompleteComponent,
     PlaceDescriptionComponent,
+    OldPlacesComponent,
   ],
   imports: [
     SharedModule,
@@ -27,6 +31,8 @@ import { PlaceDescriptionComponent } from './place-description/place-description
     GooglePlaceModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    HttpClientModule,
+    InfiniteScrollModule,
   ],
 })
 export class SearchMapsModule {}

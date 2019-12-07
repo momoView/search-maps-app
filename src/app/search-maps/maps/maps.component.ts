@@ -34,6 +34,14 @@ export class MapsComponent implements OnInit, OnDestroy {
     );
   }
 
+  mapSPMarker(){
+    return !!(this.selectedPLat && this.selectedPLng)
+  }
+
+  storeSelectedPlace() {
+    this.store.dispatch(new smActions.DoStoreSelectedPlace());
+  }
+
   onMapClicked(event) {
     this.selectedPLat = event.coords.lat;
     this.selectedPLng = event.coords.lng;
@@ -49,6 +57,16 @@ export class MapsComponent implements OnInit, OnDestroy {
 
   onMarkerPClicked() {
     this.openInfoP = true;
+  }
+
+  onMarkerSPClicked() {
+    this.store.dispatch(new smActions.DoFetchSelectedPlace(
+      {
+        lat: this.selectedPLat,
+        lng: this.selectedPLng
+      }
+    ));
+    this.openInfoSP = true;
   }
 
   ngOnDestroy(){
