@@ -1,5 +1,6 @@
   
-I used google maps API and google places API to develop this project when both of these APIs used to be free to use for testing.
+I used google maps API and google places API to develop this project when both of these APIs used to be free to use for testing,
+since these 2 APIs aren't free to use for testing anymore, you can't have the full functionality of the application.
 You can access these 2 APIs through the google API console. 
 I used also @ngrx's Redux directly from the start without developing services.
 
