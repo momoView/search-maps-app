@@ -11,7 +11,7 @@ import {
 } from 'rxjs/operators';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { HttpClient } from '@angular/common/http';
-import * as _ from "lodash";
+import * as _ from 'lodash';
 
 import * as smActions from './search-maps.actions';
 import * as fromSM from './search-maps.reducers';
@@ -21,12 +21,10 @@ import { Place } from '../../shared/place.model';
 export class SearchMapsEffects {
   placesRef: AngularFireList<any> = null;
 
-  constructor(private actions$: Actions,
-    public db: AngularFireDatabase,
-    private httpClient: HttpClient,
-    private store: Store<fromSM.FeatureState>) {
-      this.placesRef = db.list('/places');
-    }
+  constructor(private actions$: Actions, public db: AngularFireDatabase,
+  private httpClient: HttpClient, private store: Store<fromSM.FeatureState>) {
+    this.placesRef = db.list('/places');
+  }
 
   @Effect()
   doStore$ = this.actions$.pipe(ofType(smActions.DO_STORE), map(
@@ -49,23 +47,6 @@ export class SearchMapsEffects {
     }
   ));
 
-  getPlaces(actionData: { startAt: number, endBefore: number }): Observable<any[]> {
-    return this.placesRef.snapshotChanges().pipe(map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    }), map(
-      places => {
-        let placesV;
-
-        if (actionData.endBefore > places.length) {
-          placesV = _.slice(places, actionData.startAt, places.length);
-        } else {
-          placesV = _.slice(places, actionData.startAt, actionData.endBefore);
-        }
-        
-        return placesV;
-    }));
-  }
-
   @Effect()
   doFetch$ = this.actions$.pipe(ofType(smActions.DO_FETCH), map(
     (smAction: smActions.DoFetch) => {
@@ -79,8 +60,8 @@ export class SearchMapsEffects {
     (afPlaces: any[]) => {
       return new smActions.SetPlaces(afPlaces);
     }
-  ),catchError(
-    (error,X)=>{
+  ), catchError(
+    (error, X) => {
       console.log(error);
       console.log(X);
       return X;
@@ -93,37 +74,43 @@ export class SearchMapsEffects {
       return smAction.payload;
     }
   ), switchMap(
-    (actionData: {lat: number, lng: number }) => {      
-      return this.httpClient.get("https://maps.googleapis.com/maps/api/place/nearbysearch/json?" +
-      "location=" + actionData.lat + "," + actionData.lng +
-      "&radius=24&key=AIzaSyB9JZkvyU7eCkoAnCukbkKkkfZpBuXEAsA");
+    (actionData: {lat: number, lng: number }) => {
+      return this.httpClient.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json?' +
+      'location=' + actionData.lat + ',' + actionData.lng +
+      '&radius=24&key=AIzaSyB9JZkvyU7eCkoAnCukbkKkkfZpBuXEAsA');
     }
-  ),map(
+  ), map(
     (placesData) => {
-      let propPlacesData = Object.keys(placesData);
-      let placesDataV = [];
+      const propPlacesData = Object.keys(placesData);
+      const placesDataV = [];
 
-      for (let prop of propPlacesData){
+      for (const prop of propPlacesData) {
         placesDataV.push(placesData[prop]);
       }
 
-      if (placesDataV[2] !== "ZERO_RESULTS") {
+      if (placesDataV[2] !== 'ZERO_RESULTS') {
         if (placesDataV[1].length > 0) {
           const gpPlace = placesDataV[1]
             [this.chooseBestPlace(placesDataV[1])];
 
-          let name, lat, lng, phoneNumber, icon, types, vicinity;
+          let name;
+          let lat;
+          let lng;
+          let phoneNumber;
+          let icon;
+          let types;
+          let vicinity;
 
           if (!gpPlace['name']) {
             name = null;
           } else {
             name = gpPlace.name;
           }
-          
+
           if (!gpPlace.geometry.location['lat']
             || !gpPlace.geometry.location['lng']) {
-            lat=0;
-            lng=0;
+            lat = 0;
+            lng = 0;
           } else {
             lat = gpPlace.geometry.location.lat;
             lng = gpPlace.geometry.location.lng;
@@ -188,7 +175,7 @@ export class SearchMapsEffects {
         new smActions.SetSPA(true)
       ];
     }
-  ),catchError(
+  ), catchError(
     (error, X) => {
       console.log(error);
       console.log(X);
@@ -196,25 +183,42 @@ export class SearchMapsEffects {
     }
   ));
 
-  chooseBestPlace(results) {
-    let viewports = [];
+  getPlaces(actionData: { startAt: number, endBefore: number }): Observable<any[]> {
+    return this.placesRef.snapshotChanges().pipe(map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    }), map(
+      places => {
+        let placesV;
 
-    for (let res of results) {
+        if (actionData.endBefore > places.length) {
+          placesV = _.slice(places, actionData.startAt, places.length);
+        } else {
+          placesV = _.slice(places, actionData.startAt, actionData.endBefore);
+        }
+
+        return placesV;
+    }));
+  }
+
+  chooseBestPlace(results) {
+    const viewports = [];
+
+    for (const res of results) {
       viewports.push(res.geometry.viewport);
     }
 
-    let differencesLatLng = [];
+    const differencesLatLng = [];
 
-    for (let vp of viewports) {
+    for (const vp of viewports) {
       differencesLatLng.push({
         diffLat: (vp.northeast.lat - vp.southwest.lat),
         diffLng: (vp.northeast.lng - vp.southwest.lng)
       });
     }
 
-    let surfaces = [];
+    const surfaces = [];
 
-    for (let diff of differencesLatLng) {
+    for (const diff of differencesLatLng) {
       surfaces.push(diff.diffLat * diff.diffLng);
     }
 
@@ -228,7 +232,7 @@ export class SearchMapsEffects {
     let indexS = 0;
     let counter = 0;
 
-    for (let surf of surfs) {
+    for (const surf of surfs) {
       if (minSurface > surf) {
         minSurface = surf;
         indexS = counter;
@@ -236,7 +240,7 @@ export class SearchMapsEffects {
 
       counter++;
     }
-    
+
     return indexS;
   }
 }

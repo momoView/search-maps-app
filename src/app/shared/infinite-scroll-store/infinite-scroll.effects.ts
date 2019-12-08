@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import * as _ from "lodash";
 import * as isActions from './infinite-scroll.actions';
 
 @Injectable()
@@ -13,15 +12,6 @@ export class InfiniteScrollEffects {
 
   constructor(private actions$: Actions, public db: AngularFireDatabase) {
     this.placesRef = db.list('/places');
-  }
-
-  getTotalPlaces(): Observable<number> {
-    return this.placesRef.snapshotChanges().pipe(map(changes => {
-      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    }), map(
-      places => {
-        return places.length;
-    }));
   }
 
   @Effect()
@@ -33,11 +23,20 @@ export class InfiniteScrollEffects {
     (totalP: number) => {
       return new isActions.InitializeScroll(totalP);
     }
-  ),catchError(
-    (error, X)=>{
+  ), catchError(
+    (error, X) => {
       console.log(error);
       console.log(X);
       return X;
     }
   ));
+
+  getTotalPlaces(): Observable<number> {
+    return this.placesRef.snapshotChanges().pipe(map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    }), map(
+      places => {
+        return places.length;
+    }));
+  }
 }

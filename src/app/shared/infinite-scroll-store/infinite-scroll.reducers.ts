@@ -1,12 +1,12 @@
 import * as isActions from './infinite-scroll.actions';
 
 export interface State {
-  totalPlaces: number,
-  reachedDown: number,
-  reachedUp: number,
-  scrollDDistance: number,
-  scrollUDistance: number,
-};
+  totalPlaces: number;
+  reachedDown: number;
+  reachedUp: number;
+  scrollDDistance: number;
+  scrollUDistance: number;
+}
 
 const initialState: State = {
   totalPlaces: 0,
@@ -17,9 +17,9 @@ const initialState: State = {
 };
 
 export function infiniteScrollReducer(state = initialState, action: isActions.ISActions) {
-  switch(action.type) {
+  switch (action.type) {
     case isActions.INITIALIZE_SCROLL:
-      let totalP = action.payload;
+      const totalP = action.payload;
       let scrollDDI;
       let rd;
 
@@ -59,7 +59,7 @@ export function infiniteScrollReducer(state = initialState, action: isActions.IS
       }
 
       let scrollDD = state.scrollDDistance - 1;
-      let scrollUD = state.scrollUDistance + 1;
+      const scrollUD = state.scrollUDistance + 1;
 
       if (scrollDD < 0) {
         scrollDD = 0;
@@ -72,7 +72,7 @@ export function infiniteScrollReducer(state = initialState, action: isActions.IS
       let rdPS = state.reachedDown - 10;
       let ruPS = state.reachedUp - 10;
       if (rdPS < state.totalPlaces) {
-        if(rdPS - 29 < 0) {
+        if (rdPS - 29 < 0) {
           rdPS = 29;
         }
       } else {
@@ -87,9 +87,9 @@ export function infiniteScrollReducer(state = initialState, action: isActions.IS
         ruPS = 0;
       }
 
-      let scrollDDis = state.scrollDDistance + 1;
+      const scrollDDis = state.scrollDDistance + 1;
       let scrollUDis = state.scrollUDistance - 1;
-      
+
       if (scrollUDis <= 0) {
         scrollUDis = 0.01;
       }

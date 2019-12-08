@@ -9,14 +9,14 @@ import { SignupComponent } from './signup/signup.component';
 import { SigninComponent } from './signin/signin.component';
 
 @NgModule({
-  declarations:[
+  declarations: [
     SignupComponent,
     SigninComponent,
     ChangePasswordComponent,
     ForgotPasswordComponent,
     ProfileComponent
   ],
-  imports:[
+  imports: [
     FormsModule,
     AuthRoutingModule
   ]

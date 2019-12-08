@@ -21,12 +21,12 @@ export class ChangePasswordComponent implements OnInit {
       from(firebase.auth().currentUser.updatePassword(f.value.newPassword)).pipe(take(1)).subscribe(
         (data) => {
           console.log(data);
-        }
-        ,(error)=>{
+        },
+        (error) => {
           console.log(error);
       });
     } else {
-      console.log("the 2 passwords don't match each others");
+      console.log('the 2 passwords don\'t match each others');
     }
 
     f.setValue({

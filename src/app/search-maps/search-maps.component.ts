@@ -17,21 +17,24 @@ export class SearchMapsComponent implements OnInit {
   constructor(private store: Store<fromSM.FeatureState>) {}
 
   ngOnInit() {
-    let lat, lng, name, place;
+    let lat;
+    let lng;
+    let name;
+    let place;
 
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         lat = position.coords.latitude;
         lng = position.coords.longitude;
         if (!lat || !lng) {
-          name = "(0,0)";
+          name = '(0,0)';
           lat = 0;
           lng = 0;
         } else {
-          name = "Current Position";
+          name = 'Current Position';
         }
 
-        place = new Place(name, lat, lng, "", "", [], "");
+        place = new Place(name, lat, lng, '', '', [], '');
         this.store.dispatch(new smActions.SetPlace(place));
         this.store.dispatch(new smActions.SetCurrentPlace(place));
       });
@@ -43,7 +46,7 @@ export class SearchMapsComponent implements OnInit {
         if (authState.authenticated) {
           this.store.select('infiniteScroll').pipe(take(1)).subscribe(
             (isState) => {
-              this.store.dispatch(new smActions.DoFetch({ 
+              this.store.dispatch(new smActions.DoFetch({
                 startAt: isState.reachedUp,
                 endBefore: isState.reachedDown + 1
               }));

@@ -1,12 +1,12 @@
 import {Action} from '@ngrx/store';
 
-export const SIGN_UP = "SIGN_UP";
-export const SIGN_IN = "SIGN_IN";
-export const LOGOUT = "LOGOUT";
-export const SET_TOKEN = "SET_TOKEN";
-export const DO_SIGN_UP = "DO_SIGN_UP";
-export const DO_SIGN_IN = "DO_SIGN_IN";
-export const DO_LOGOUT = "DO_LOGOUT";
+export const SIGN_UP = 'SIGN_UP';
+export const SIGN_IN = 'SIGN_IN';
+export const LOGOUT = 'LOGOUT';
+export const SET_TOKEN = 'SET_TOKEN';
+export const DO_SIGN_UP = 'DO_SIGN_UP';
+export const DO_SIGN_IN = 'DO_SIGN_IN';
+export const DO_LOGOUT = 'DO_LOGOUT';
 
 export class SignUp implements Action {
   readonly type = SIGN_UP;
