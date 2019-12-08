@@ -1,0 +1,14 @@
+  
+I used google maps API and google places API to develop this project when both of these APIs used to be free to use for testing.
+You can access these 2 APIs through the google API console. 
+I used also @ngrx's Redux directly from the start without developing services.
+
+This the url for a chrome extension that you might need to install for CORS (Cross Origin Resource Sharing): Allow-Control-Allow-Origin
+https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf  .
+
+This extension is needed to manage CORS for google places API.
+You need to add this link to the whitelisted domains field 'https://proud-limiter-210411.firebaseio.com/*',
+to disable CORS for the authentication operations because it's not needed.
+
+The infinite scroll for the visited places used to work once and then doesn't anymore, it serves to load more places
+for the old places list once the user scrolls down or up in that list.
