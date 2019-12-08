@@ -7,9 +7,7 @@ export class Place {
   types: string[];
   vicinity: string;
 
-  constructor(name: string, lat: number, lng: number,
-    phoneNumber: string, icon: string, types: string[],
-    vicinity: string) {
+  constructor(name: string, lat: number, lng: number, phoneNumber: string, icon: string, types: string[], vicinity: string) {
     this.name = name;
     this.lat = lat;
     this.lng = lng;

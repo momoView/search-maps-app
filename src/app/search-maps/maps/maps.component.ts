@@ -14,7 +14,7 @@ import * as fromSM from '../store/search-maps.reducers';
   styleUrls: ['./maps.component.css']
 })
 export class MapsComponent implements OnInit, OnDestroy {
-  zoom:number = 17;
+  zoom = 17;
   authState$: Observable<fromAuth.State>;
   smState$: Observable<fromSM.State>;
   openInfoP: boolean;
@@ -30,8 +30,8 @@ export class MapsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authState$ = this.store.select('auth');
     this.smState$ = this.store.select('searchMaps');
-    this.selectedPLat=null;
-    this.selectedPLng=null;
+    this.selectedPLat = null;
+    this.selectedPLng = null;
     this.subscription = this.store.select('searchMaps').subscribe(
       (smState) => {
         this.mapLat = smState.mapPosition.lat;
@@ -40,8 +40,8 @@ export class MapsComponent implements OnInit, OnDestroy {
     );
   }
 
-  mapSPMarker(){
-    return !!(this.selectedPLat && this.selectedPLng)
+  mapSPMarker() {
+    return !!(this.selectedPLat && this.selectedPLng);
   }
 
   storeSelectedPlace() {
@@ -50,14 +50,14 @@ export class MapsComponent implements OnInit, OnDestroy {
 
   onMapClicked(event) {
     this.store.select('auth').pipe(take(1)).subscribe(
-      (authState)=>{
-        if(authState.authenticated){
+      (authState) => {
+        if (authState.authenticated) {
           this.selectedPLat = event.coords.lat;
           this.selectedPLng = event.coords.lng;
           this.openInfoP = false;
           this.openInfoSP = false;
-          const place = new Place(null,this.selectedPLat, this.selectedPLng,
-            null, null, [], null)
+          const place = new Place(null, this.selectedPLat, this.selectedPLng,
+            null, null, [], null);
 
           // to initialize the position of the cursor for the moment
           this.store.dispatch(new smActions.SetTemporarySP(place));
@@ -73,8 +73,8 @@ export class MapsComponent implements OnInit, OnDestroy {
 
   onMarkerSPClicked() {
     this.store.select('auth').pipe(take(1)).subscribe(
-      (authState)=>{
-        if(authState.authenticated){
+      (authState) => {
+        if (authState.authenticated) {
           this.store.dispatch(new smActions.DoFetchSelectedPlace(
             {
               lat: this.selectedPLat,
@@ -87,7 +87,7 @@ export class MapsComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 }

@@ -11,8 +11,8 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private store: Store<fromSM.FeatureState>) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url === "https://proud-limiter-210411.firebaseio.com/places.json") {
-      return this.store.select('auth').pipe(take(1),switchMap(
+    if (req.url === 'https://proud-limiter-210411.firebaseio.com/places.json') {
+      return this.store.select('auth').pipe(take(1), switchMap(
         (authState) => {
           const copiedReq = req.clone({ params: req.params.set('auth', authState.token) });
           return (next.handle(copiedReq));

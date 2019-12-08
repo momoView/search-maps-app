@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Place } from '../../shared/place.model';
 
-export const SET_CURRENT_PLACE = "SET_CURRENT_PLACE";
+export const SET_CURRENT_PLACE = 'SET_CURRENT_PLACE';
 export const SET_PLACE = 'SET_PLACE';
 export const DO_STORE = 'DO_STORE';
 export const DO_FETCH = 'DO_FETCH';

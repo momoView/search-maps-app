@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import * as fromAuth from '../../auth/store/auth.reducers';
-import  { Place } from '../../shared/place.model';
+import { Place } from '../../shared/place.model';
 import * as smActions from '../store/search-maps.actions';
 import * as fromSM from '../store/search-maps.reducers';
 
@@ -23,12 +23,18 @@ export class MapsAutocompleteComponent implements OnInit {
   }
 
   handleAddressChange(address) {
-    let name, lat, lng, phoneNumber, icon, types, vicinity;
+    let name;
+    let lat;
+    let lng;
+    let phoneNumber;
+    let icon;
+    let types;
+    let vicinity;
 
     if (address['name']) {
       name = address.name;
     } else {
-      name= null;
+      name = null;
     }
 
     if (address.geometry.location['lat']
@@ -36,7 +42,7 @@ export class MapsAutocompleteComponent implements OnInit {
         lat = address.geometry.location.lat();
         lng = address.geometry.location.lng();
     } else {
-      lat = null; 
+      lat = null;
       lng = null;
     }
 

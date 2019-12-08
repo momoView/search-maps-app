@@ -30,7 +30,7 @@ export class AuthEffects {
       return [
         new authActions.SetToken(token),
         new authActions.SignUp()
-      ]
+      ];
     }
   ), catchError(
     (error, X) => {
@@ -58,7 +58,7 @@ export class AuthEffects {
       return[
         new authActions.SetToken(token),
         new authActions.SignIn()
-      ]
+      ];
     }
   ), catchError(
     (error, X) => {
@@ -77,7 +77,7 @@ export class AuthEffects {
       return new authActions.Logout();
     }
   ), catchError(
-    (error, X)=>{
+    (error, X) => {
       console.log(error);
       return X;
     }

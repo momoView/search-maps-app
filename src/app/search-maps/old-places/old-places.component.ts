@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 
 import * as fromAuth from '../../auth/store/auth.reducers';
 import * as isActions from '../../shared/infinite-scroll-store/infinite-scroll.actions';
-import { Place } from '../../shared/place.model'
+import { Place } from '../../shared/place.model';
 import * as smActions from '../store/search-maps.actions';
 import * as fromSM from '../store/search-maps.reducers';
 
@@ -54,7 +54,7 @@ export class OldPlacesComponent implements OnInit {
           } else {
             place = smState.currentPlace;
           }
-          
+
           if (!place['name']) {
             place.name = null;
           }

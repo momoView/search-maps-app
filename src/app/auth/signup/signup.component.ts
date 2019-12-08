@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
     if (f.value.password === f.value.confirmPassword) {
         this.store.dispatch(new authActions.DoSignUp({ email: f.value.email, password: f.value.password }));
     } else {
-      console.log("The passwords don't match with each others!");
+      console.log('The passwords don\'t match with each others!');
     }
   }
 }

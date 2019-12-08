@@ -4,16 +4,16 @@ import * as fromApp from '../../store/app.reducers';
 import * as smActions from './search-maps.actions';
 
 export interface FeatureState extends fromApp.AppState {
-  searchMaps: State
+  searchMaps: State;
 }
 
 export interface State {
-  currentPlace: Place,
-  mapPosition: { lat: number, lng: number },
-  place: Place,
-  oldPlaces: any[],
-  selectedPlace: Place,
-  selectedPlaceAdded: boolean,
+  currentPlace: Place;
+  mapPosition: { lat: number, lng: number };
+  place: Place;
+  oldPlaces: any[];
+  selectedPlace: Place;
+  selectedPlaceAdded: boolean;
 }
 
 const initialState: State = {
@@ -31,25 +31,24 @@ const initialState: State = {
     vicinity: null,
   },
   oldPlaces: [],
-  selectedPlace:null,
-  selectedPlaceAdded:false,
+  selectedPlace: null,
+  selectedPlaceAdded: false,
 };
 
-export function searchMapsReducer(state = initialState,
-  action: smActions.SMActions) {
-  switch(action.type) {
+export function searchMapsReducer(state = initialState, action: smActions.SMActions) {
+  switch (action.type) {
     case smActions.SET_CURRENT_PLACE:
       const currentPlace = { ...action.payload };
 
       return {
-        ...state, currentPlace: currentPlace,
+        ...state, currentPlace,
           mapPosition: { lat: currentPlace.lat,
             lng: currentPlace.lng }
       };
     case smActions.SET_PLACE:
       const place = { ...action.payload };
       return {
-        ...state, place: place,
+        ...state, place,
           mapPosition: { lat: place.lat, lng: place.lng }
       };
     case smActions.ADD_TO_OLD_PLACES:
@@ -63,7 +62,7 @@ export function searchMapsReducer(state = initialState,
         ...state, oldPlaces: cPlaces
       };
     case smActions.SET_TEMPORARY_SP:
-      const selPlace = { ...action.payload }
+      const selPlace = { ...action.payload };
       return {
         ...state, selectedPlace: selPlace, mapPosition:
           {lat: selPlace.lat, lng: selPlace.lng }
