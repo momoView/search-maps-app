@@ -21,8 +21,10 @@ import { Place } from '../../shared/place.model';
 export class SearchMapsEffects {
   placesRef: AngularFireList<any> = null;
 
-  constructor(private actions$: Actions, public db: AngularFireDatabase,
-  private httpClient: HttpClient, private store: Store<fromSM.FeatureState>) {
+  constructor(
+    private actions$: Actions, public db: AngularFireDatabase,
+    private httpClient: HttpClient, private store: Store<fromSM.FeatureState>
+  ) {
     this.placesRef = db.list('/places');
   }
 
@@ -101,14 +103,14 @@ export class SearchMapsEffects {
           let types;
           let vicinity;
 
-          if (!gpPlace['name']) {
+          if (gpPlace && !gpPlace.name) {
             name = null;
           } else {
             name = gpPlace.name;
           }
 
-          if (!gpPlace.geometry.location['lat']
-            || !gpPlace.geometry.location['lng']) {
+          if (gpPlace.geometry.location && !gpPlace.geometry.location.lat
+            || !gpPlace.geometry.location.lng) {
             lat = 0;
             lng = 0;
           } else {
@@ -116,25 +118,25 @@ export class SearchMapsEffects {
             lng = gpPlace.geometry.location.lng;
           }
 
-          if (!gpPlace['formatted_phone_number']) {
+          if (gpPlace && !gpPlace.formatted_phone_number) {
             phoneNumber = null;
           } else {
             phoneNumber = gpPlace.formatted_phone_number;
           }
 
-          if (!gpPlace['icon']) {
+          if (gpPlace && !gpPlace.icon) {
             icon = null;
           } else {
             icon = gpPlace.icon;
           }
 
-          if (!gpPlace['types']) {
+          if (gpPlace && !gpPlace.types) {
             types = [];
           } else {
             types = gpPlace.types;
           }
 
-          if (!gpPlace['vicinity']) {
+          if (gpPlace && !gpPlace.vicinity) {
             vicinity = null;
           } else {
             vicinity = gpPlace.vicinity;
