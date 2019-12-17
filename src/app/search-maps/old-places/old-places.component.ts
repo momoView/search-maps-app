@@ -55,28 +55,28 @@ export class OldPlacesComponent implements OnInit {
             place = smState.currentPlace;
           }
 
-          if (!place['name']) {
+          if (place && !place.name) {
             place.name = null;
           }
 
-          if (!place['lat'] || !place['lng']) {
+          if (place && !place.lat || !place.lng) {
             place.lat = 0;
             place.lng = 0;
           }
 
-          if (!place['phoneNumber']) {
+          if (place && !place.phoneNumber) {
             place.phoneNumber = null;
           }
 
-          if (!place['icon']) {
+          if (place && !place.icon) {
             place.icon = null;
           }
 
-          if (!place['types']) {
+          if (place && !place.types) {
             place.types = [];
           }
 
-          if (!place['vicinity']) {
+          if (place && !place.vicinity) {
             place.vicinity = null;
           }
 

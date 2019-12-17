@@ -31,14 +31,14 @@ export class MapsAutocompleteComponent implements OnInit {
     let types;
     let vicinity;
 
-    if (address['name']) {
+    if (address && address.name) {
       name = address.name;
     } else {
       name = null;
     }
 
-    if (address.geometry.location['lat']
-      && address.geometry.location['lng']) {
+    if (address.geometry.location && address.geometry.location.lat
+      && address.geometry.location.lng) {
         lat = address.geometry.location.lat();
         lng = address.geometry.location.lng();
     } else {
@@ -46,25 +46,25 @@ export class MapsAutocompleteComponent implements OnInit {
       lng = null;
     }
 
-    if (address['formatted_phone_number']) {
+    if (address && address.formatted_phone_number) {
       phoneNumber = address.formatted_phone_number;
     } else {
       phoneNumber = null;
     }
 
-    if (address['icon']) {
+    if (address && address.icon) {
       icon = address.icon;
     } else {
       icon = null;
     }
 
-    if (address['types']) {
+    if (address && address.types) {
       types = address.types;
     } else {
       types = [];
     }
 
-    if (address['vicinity']) {
+    if (address && address.vicinity) {
       vicinity = address.vicinity;
     } else {
       vicinity = null;
