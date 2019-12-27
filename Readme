@@ -5,7 +5,8 @@ You can access these 2 APIs through the google API console.
 I used also @ngrx's Redux directly from the start without developing services.
 
 In the start the user is disconnected, so you cannot interact with the map nor the autocomplete nor the list, you need first
-to register a user then login (register & login links in header) then you will be able to use all the elements of the application.
+to register a user then login (register & login links in header (passwords should be at least 6 characters, for hints open
+browser's console every http request is logged into the it)) then you will be able to use all the elements of the application.
 
 This the url for a chrome extension that you might need to install for CORS (Cross Origin Resource Sharing): Allow-Control-Allow-Origin
 https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf  .
